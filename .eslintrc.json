@@ -12,14 +12,15 @@
     "plugin:prettier/recommended",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+	"plugin:sonarjs/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "plugins": ["@typescript-eslint","sonarjs", "prettier", "import"],
   "rules": {
     "prettier/prettier": "error",
     "import/no-unresolved": "error",

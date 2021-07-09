@@ -1,6 +1,8 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  testResultsProcessor: 'jest-sonar-reporter',
+  collectCoverage: true,
   coverageDirectory: 'coverage',
   collectCoverageFrom: ['src/**/*.{js,ts}'],
   coverageThreshold: {

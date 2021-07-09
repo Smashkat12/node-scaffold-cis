@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/Users/katlegomorulane/Google Drive/Project_Wethinkcode_/node-scaffold-cis/src/__tests__/add.test.ts">
+    <testCase name="Test math functions should pass" duration="3"/>
+  </file>
+</testExecutions>
