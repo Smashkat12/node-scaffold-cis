@@ -4,5 +4,3 @@ import add from '@src/math/add';
 dotenv.config();
 
 console.log(add(1, 5));
-
-const just = 0;
