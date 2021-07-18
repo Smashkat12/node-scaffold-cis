@@ -1,0 +1,6 @@
+{
+  "sonarlint.connectedMode.project": {
+    "connectionId": "http://54.229.145.115:9000",
+    "projectKey": "testFunctionalDomain:nodeScaffold:develop"
+  }
+}
