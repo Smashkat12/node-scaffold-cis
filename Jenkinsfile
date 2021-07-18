@@ -23,7 +23,8 @@ pipeline {
 				}
 			}
 			steps {
-				nodejs(nodeJSInstallationName: 'nodejs14.15.4'){
+				nodejs(nodeJSInstallationName: 'nodejs12.22.3'){
+					sh(label: 'node dependencies', script: 'n')
 					sh(label: 'node dependencies', script: 'npm install')
 					sh(label: 'node typescript build', script: 'npm run build')
 				}
