@@ -23,8 +23,10 @@ pipeline {
 				}
 			}
 			steps {
-				sh(label: 'node dependencies', script: 'npm install')
-				sh(label: 'node typescript build', script: 'npm run build')
+				nodejs(nodeJsInstallationName: 'nodejs14.15.4'){
+					sh(label: 'node dependencies', script: 'npm install')
+					sh(label: 'node typescript build', script: 'npm run build')
+				}
 				sh(label: 'zip files', script: 'cd dist && zip -r ../node-scaffold-cis.zip *')
 			}
 		}
