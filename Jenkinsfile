@@ -42,13 +42,18 @@ pipeline {
 			parallel {
 				stage('Running Unit Test & Sonar-Scanner') {
 					steps {
-						sh(label: 'running unit tests', script: 'sudo npm run test:coverage')
+						nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
+							sh(label: 'running unit tests', script: 'npm run test:coverage')
+						}
+						
 					}
 				}
 				stage('Code Quality Analysis') {
 					steps {
 						withSonarQubeEnv('SonarQube') {
-							sh(label: 'running sonar-scanner', script: 'npm run test:sonar')
+							nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
+								sh(label: 'running sonar-scanner', script: 'npm run test:sonar')
+							}
 						}
 						waitForQualityGate abortPipeline: true
 					}
