@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Default node scaffold to start from",
   "main": "server.js",
+  "publishConfig": {
+    "registry": "http://ec2-54-216-103-90.eu-west-1.compute.amazonaws.com:8081/repository/metretail-artifacts-snapshot/"
+  },
   "scripts": {
     "start:dev": "nodemon",
     "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/server.js",
