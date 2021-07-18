@@ -24,7 +24,6 @@ pipeline {
 			}
 			steps {
 				nodejs(nodeJSInstallationName: 'nodejs12.22.3'){
-					sh(label: 'node dependencies', script: 'n')
 					sh(label: 'node dependencies', script: 'npm install')
 					sh(label: 'node typescript build', script: 'npm run build')
 				}
