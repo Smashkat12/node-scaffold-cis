@@ -54,14 +54,6 @@ pipeline {
 			}
 		}
 		stage('Upload to Artifactory') {
-			when {
-				not {
-					anyOf {
-						branch 'master'
-						branch 'feature/*'
-					}
-				}
-			}
 			steps {
 				script {
 					if (env.BRANCH_NAME.contains('develop')) {
@@ -90,14 +82,6 @@ pipeline {
 			}
 		}
 		stage('Deploy to DEV') {
-			when {
-				not {
-					anyOf {
-						branch: 'master'
-						branch: 'feature/*'
-					}
-				}
-			}
 			steps {
 				script {
 					if (env.BRANCH_NAME.contains('develop')) {
