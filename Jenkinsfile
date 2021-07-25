@@ -55,7 +55,7 @@ pipeline {
 								sh(label: 'running sonar-scanner', script: 'npm run test:sonar')
 							}
 						}
-						waitForQualityGate abortPipeline: true
+						waitForQualityGate abortPipeline: false
 					}
 				}
 			}
