@@ -17,7 +17,7 @@ pipeline {
 			when {
 				not {
 					anyOf {
-						branch 'master'
+						branch 'develop'
 						branch 'feature/*'
 					}
 				}
@@ -32,7 +32,7 @@ pipeline {
 			when {
 				not {
 					anyOf {
-						branch 'master'
+						branch 'develop'
 						branch 'feature/*'
 					}
 				}
@@ -57,14 +57,14 @@ pipeline {
 			when {
 				not {
 					anyOf {
-						branch 'master'
+						branch 'develop'
 						branch 'feature/*'
 					}
 				}
 			}
 			steps {
 				script {
-					if (env.BRANCH_NAME.contains('develop')) {
+					if (env.BRANCH_NAME.contains('master')) {
 						REPOSITORY = 'metretail-artifacts-snapshot'
 						VERSION = env.NEXUS_ARTIFACT_VERSION_PREFIX + '0-SNAPSHOT'
 					}else {
@@ -100,7 +100,7 @@ pipeline {
 			}
 			steps {
 				script {
-					if (env.BRANCH_NAME.contains('develop')) {
+					if (env.BRANCH_NAME.contains('master')) {
 						//triggerDeployment(repository: 'metretail-artifacts-snapshot',build_env: 'dev')
 						echo 'deploying to dev'
 					} else if (env.BRANCH_NAME.contains('release')) {
