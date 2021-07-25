@@ -77,7 +77,7 @@ pipeline {
 					nexusArtifactUploader artifacts: [
 					[artifactId: 'node-scaffold-cis',
 					classifier: '',
-					file: '/var/lib/jenkins/workspace/node-scaffold-cis.zip',
+					file: '/var/lib/jenkins/workspace/node-scaffold-cis/node-scaffold-cis.zip',
 					type: 'zip'
 					]
 				],
