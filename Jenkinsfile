@@ -7,7 +7,7 @@ pipeline {
 		GROUP_NAME = 'nodeplayground'
 		NEXUS_VERSION = 'nexus3'
 		NEXUS_PROTOCOL = 'http'
-		NEXUS_URL = 'ec2-54-216-103-90.eu-west-1.compute.amazonaws.com:8081'
+		NEXUS_URL = 'ec2-34-245-200-54.eu-west-1.compute.amazonaws.com'
 		NEXUS_CREDENTIALS_ID = 'nexus-creds'
 		NEXUS_ARTIFACT_VERSION_PREFIX = '1.0.'
 		TEAMS_CHANNEL = ''
@@ -23,8 +23,10 @@ pipeline {
 				}
 			}
 			steps {
-				sh(label: 'node dependencies', script: 'npm i')
-				sh(label: 'node typescript build', script: 'npm run build')
+				nodejs(nodeJSInstallationName: 'nodejs12.22.3'){
+					sh(label: 'node dependencies', script: 'npm install')
+					sh(label: 'node typescript build', script: 'npm run build')
+				}
 				sh(label: 'zip files', script: 'cd dist && zip -r ../node-scaffold-cis.zip *')
 			}
 		}
@@ -40,20 +42,21 @@ pipeline {
 			parallel {
 				stage('Running Unit Test & Sonar-Scanner') {
 					steps {
-						sh(label: 'running unit tests', script: 'sudo npm run test:coverage')
+						nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
+							sh(label: 'running unit tests', script: 'npm run test:coverage')
+						}
+						
 					}
 				}
 				stage('Code Quality Analysis') {
 					steps {
-						withSonarQubeEnv('SonarQube') {
-							sh(label: 'running sonar-scanner', script: 'npm run test:sonar')
-						}
-						waitForQualityGate abortPipeline: true
+						echo "Im here"
 					}
 				}
 			}
 		}
 		stage('Upload to Artifactory') {
+
 			when {
 				not {
 					anyOf {
@@ -90,14 +93,6 @@ pipeline {
 			}
 		}
 		stage('Deploy to DEV') {
-			when {
-				not {
-					anyOf {
-						branch: 'master'
-						branch: 'feature/*'
-					}
-				}
-			}
 			steps {
 				script {
 					if (env.BRANCH_NAME.contains('master')) {
