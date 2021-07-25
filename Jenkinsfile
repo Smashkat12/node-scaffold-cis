@@ -7,7 +7,7 @@ pipeline {
 		GROUP_NAME = 'nodeplayground'
 		NEXUS_VERSION = 'nexus3'
 		NEXUS_PROTOCOL = 'http'
-		NEXUS_URL = 'ec2-34-245-200-54.eu-west-1.compute.amazonaws.com'
+		NEXUS_URL = 'ec2-34-245-200-54.eu-west-1.compute.amazonaws.com:8081'
 		NEXUS_CREDENTIALS_ID = 'nexus-creds'
 		NEXUS_ARTIFACT_VERSION_PREFIX = '1.0.'
 		TEAMS_CHANNEL = ''
