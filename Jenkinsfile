@@ -30,7 +30,7 @@ pipeline {
 				sh(label: 'zip files', script: 'cd dist && zip -r ../node-scaffold-cis.zip *')
 			}
 		}
-		stage ('Quality Gate') {
+		stage ('Run Unit Tests') {
 			when {
 				not {
 					anyOf {
@@ -39,22 +39,30 @@ pipeline {
 					}
 				}
 			}
-			parallel {
-				stage('Running Unit Test & Sonar-Scanner') {
-					steps {
-						nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
-							sh(label: 'running unit tests', script: 'npm run test:coverage')
-						}
-						
-					}
+			steps {
+				nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
+					sh(label: 'running unit tests', script: 'npm run test:coverage')
 				}
-				stage('Code Quality Analysis') {
-					steps {
-						echo "Im here"
+						
+			}
+		}
+
+		stage ('Quality Gate') {
+			when {
+				not {
+					anyOf {
+						branch: 'develop'
+						branch: 'feature/*'
 					}
 				}
 			}
+			steps {
+				nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
+					sh(label: 'running unit tests', script: 'npm run test:coverage')
+				}
+			}
 		}
+
 		stage('Upload to Artifactory') {
 
 			when {
