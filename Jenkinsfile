@@ -50,7 +50,7 @@ pipeline {
 				}
 				stage('Code Quality Analysis') {
 					steps {
-						withSonarQubeEnv('SonarQube') {
+						withSonarQubeEnv(installationName: 'SonarQube',credentialsId: 'Sonar-Token') {
 							nodejs(nodeJSInstallationName: 'nodejs12.22.3') {
 								sh(label: 'running sonar-scanner', script: 'npm run test:sonar')
 							}
